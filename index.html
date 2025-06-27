@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>YouTubeコメント分析ポスター</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      margin: 0;
+      padding: 2rem;
+      background-color: #fdfdfd;
+      color: #333;
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+    h1, h2, h3 {
+      color: #202060;
+      animation: fadeInDown 1s ease-out;
+    }
+    .section {
+      margin-bottom: 3rem;
+      border-left: 5px solid #202060;
+      padding-left: 1rem;
+      animation: fadeInUp 1s ease-in-out;
+    }
+    .highlight {
+      background-color: #f0f8ff;
+      padding: 0.5rem;
+      border-radius: 8px;
+      animation: fadeIn 1s ease-in-out;
+    }
+    .table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 1rem;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+    .table th, .table td {
+      border: 1px solid #aaa;
+      padding: 0.5rem;
+      text-align: center;
+    }
+    .emoji {
+      font-size: 1.2em;
+    }
+    ul {
+      margin-top: 0.5rem;
+    }
+    iframe {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      width: 100%;
+      height: 800px;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+    a {
+      color: #202060;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>🎤 YouTubeコメント分析による<br>音楽動画の非言語的商品価値の推定</h1>
+
+  <div class="section">
+    <h2>1. 研究の背景と目的</h2>
+    <p>本研究は、YouTubeに投稿された音楽動画のコメントを自然言語処理で分析し、<strong>「技術的魅力」か「アイドル的魅力」か</strong>を定量的に推定します。視聴者ではなく、<strong>開発側（制作者・運営）の視点</strong>で評価軸を把握し、演出方針やマーケティング戦略に役立てることを目指します。</p>
+    <p>近年、VTuberや歌ってみたなどのUGC（User Generated Content）は趣味的文化から商業的価値へと変化しており、ファンコミュニケーションやブランド構築の設計が極めて重要となっています。制作者は「技術性」と「アイドル性」のどちらの路線で売るべきかの判断を迫られるため、本研究では視聴者コメントを通じて「届けたい価値」と「届いている価値」のズレを明らかにし、戦略的な演出・編集の再考を促すことを目的としています。</p>
+  </div>
+
+  <div class="section">
+    <h2>2. 分析対象</h2>
+    <ul>
+      <li>① 歌ってみた動画</li>
+      <li>② VTuber音楽動画</li>
+    </ul>
+    <p>各動画に対してYouTube APIからコメントを最大100件取得し、形態素解析を行いました。</p>
+  </div>
+
+  <div class="section">
+    <h2>3. 分析方法</h2>
+    <ul>
+      <li><strong>スコア分析：</strong>技術・アイドル系キーワードに重みをつけてスコア化</li>
+      <li><strong>WordCloud：</strong>頻出語を視覚化</li>
+      <li><strong>形容詞ターゲット抽出：</strong>「〇〇がかわいい」などの対象を抽出</li>
+    </ul>
+    <p>本研究では、キーワードベースのスコアリングを採用しました。これは、意味ベクトルや文脈依存モデルに比べて結果の解釈が直感的で、制作者にフィードバックしやすいためです。また、「〇〇がかわいい」などの係り受けパターン抽出により、単なる単語頻度では捉えきれない文法構造からの意味把握を補完しています。</p>
+    <div class="highlight">
+      <p><strong>技術語例：</strong> 歌唱力, MIX, 表現力, 編集, プロ</p>
+      <p><strong>アイドル語例：</strong> かわいい, 推し, 尊い, ファンサ, 笑顔</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>4. 結果</h2>
+    <table class="table">
+      <thead>
+        <tr><th>カテゴリ</th><th>技術スコア</th><th>アイドルスコア</th><th>判定</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>歌ってみた</td><td>+12</td><td>+5</td><td class="emoji">🧠 技術型</td></tr>
+        <tr><td>VTuber</td><td>+6</td><td>+18</td><td class="emoji">🌟 アイドル型</td></tr>
+      </tbody>
+    </table>
+    <p><strong>VTuber形容詞ターゲット例：</strong><br>
+      「声がかわいい」12回、 「キャラが尊い」8回、 「仕草がかっこいい」6回
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>5. 考察と応用</h2>
+    <p>本研究の分析結果は、動画制作者にとって視聴者とのギャップ分析やブランド設計の重要な材料となる。例えば、アイドル的要素への視聴者反応が想定以上に強い場合は、演出の方向性やプロモーション戦略の見直しを促す指標となる。また、AI歌唱技術の普及に伴い、視聴者が何を「人間的魅力」と感じているかを定量的に把握できることは、新たなコンテンツ開発において大きな意義を持つ。</p>
+    <ul>
+      <li>VTuberはアイドル性の評価が強く、感情と技術が共存</li>
+      <li>歌ってみたは具体的技術用語が多く、技術重視</li>
+      <li>制作側が<strong>届いている価値</strong>を把握し、編集やプロモ戦略に反映可能</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>6. 今後の展望と課題</h2>
+    <p>本研究は初期段階としてコメント数を100件に限定しているが、今後は数千件規模への拡張や時系列比較による傾向変化の分析、また同一VTuberの楽曲間での評価軸の揺らぎ検証なども検討したい。さらに、現在は手作業で作成したキーワード辞書に依存しているため、BERTなどの文脈理解型モデルの導入やクラスタリングによる自動評価軸の発見を目指す。</p>
+    <ul>
+      <li>AI音声や公式MVも対象に</li>
+      <li>クラスタリングやBERTによる高度分析</li>
+      <li>Web・モバイルアプリ化による実用化</li>
+      <li>コメントから「見えない価値」を見える化</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>7. 分析体験（デモ）</h2>
+    <p>以下のフォームから、お好きなYouTube動画URLを入力して「技術性」と「アイドル性」をリアルタイムで分析できます。</p>
+    <iframe 
+      src="https://kana246-youtubecoment.hf.space" 
+      loading="lazy"
+      allow="clipboard-write; clipboard-read; fullscreen">
+    </iframe>
+    <p><a href="https://huggingface.co/spaces/kana246/youtubecoment" target="_blank">🔗 新しいタブで開く</a></p>
+  </div>
+</body>
+</html>
