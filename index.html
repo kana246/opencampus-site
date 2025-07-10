@@ -11,8 +11,7 @@
     }
     body {
       font-family: 'Noto Sans JP', sans-serif;
-      margin: 0;
-      padding: 0;
+      margin: 0; padding: 0;
       background-color: #fff;
       color: #111;
     }
@@ -131,8 +130,6 @@
         padding: 1.5rem;
       }
     }
-
-    /* 体験セクション用 */
     .demo-form textarea {
       width: 100%;
       min-height: 100px;
@@ -183,6 +180,7 @@
   <a href="#sec7">7. まとめと展望</a>
   <a href="#sec8">8. Web公開とデモ</a>
   <a href="#sec9">9. 体験デモ</a>
+  <a href="#sec10">10. お問い合わせ</a>
 </nav>
 
 <section id="sec0">
@@ -191,7 +189,50 @@
   <p><strong>発表者：</strong> 24B1032 矢野叶</p>
 </section>
 
-<!-- ここに他のセクションを追加してください -->
+<section id="sec1">
+  <h2>1. 研究背景と目的</h2>
+  <p>（ここに研究背景や目的の内容を入れてください）</p>
+</section>
+
+<section id="sec2">
+  <h2>2. キーワード例</h2>
+  <ul>
+    <li>コメント分析</li>
+    <li>音楽動画</li>
+    <li>価値推定</li>
+    <li>技術性・アイドル性</li>
+  </ul>
+</section>
+
+<section id="sec3">
+  <h2>3. 評価軸の定義</h2>
+  <p>（評価軸の定義について記載）</p>
+</section>
+
+<section id="sec4">
+  <h2>4. 分析モデルの仕組み</h2>
+  <p>（分析モデルの概要や技術的な説明をここに）</p>
+</section>
+
+<section id="sec5">
+  <h2>5. 結果：技術性</h2>
+  <p>（技術性に関する分析結果や解説）</p>
+</section>
+
+<section id="sec6">
+  <h2>6. 結果：アイドル性</h2>
+  <p>（アイドル性に関する分析結果や解説）</p>
+</section>
+
+<section id="sec7">
+  <h2>7. まとめと展望</h2>
+  <p>（まとめと今後の展望）</p>
+</section>
+
+<section id="sec8">
+  <h2>8. Web公開とデモ</h2>
+  <p>（Web公開の状況やデモについての説明）</p>
+</section>
 
 <section id="sec9">
   <h2>9. 体験デモ</h2>
@@ -201,6 +242,12 @@
     <button id="analyze-btn">分析する</button>
   </form>
   <div class="demo-result" id="demo-result"></div>
+</section>
+
+<section id="sec10">
+  <h2>10. お問い合わせ</h2>
+  <p>ご質問・ご意見はこちらまでお問い合わせください。</p>
+  <p><a href="mailto:your.email@example.com">your.email@example.com</a></p>
 </section>
 
 <footer>
@@ -229,7 +276,7 @@
     window.scrollTo(0, 0);
   });
 
-  // 体験デモの簡易分析処理（例：単語数でスコアを簡単計算）
+  // 体験デモの簡易分析処理
   const analyzeBtn = document.getElementById('analyze-btn');
   const commentInput = document.getElementById('comment-input');
   const resultDiv = document.getElementById('demo-result');
@@ -242,15 +289,12 @@
     }
 
     // 簡単な判定ルール例
-    // 技術性キーワード例
     const techWords = ['歌', '上手い', '声', '演奏', '技術', '巧み', 'プロ', 'うまい'];
-    // アイドル性キーワード例
     const idolWords = ['かわいい', 'かっこいい', '好き', '応援', 'ファン', '尊い', '愛してる', '最高'];
 
     let techScore = 0;
     let idolScore = 0;
 
-    // キーワードごとに含まれている回数をカウント
     techWords.forEach(word => {
       const re = new RegExp(word, 'g');
       const matches = text.match(re);
@@ -262,7 +306,6 @@
       if (matches) idolScore += matches.length;
     });
 
-    // 結果表示（スコアを%表示風に）
     const total = techScore + idolScore;
     if (total === 0) {
       resultDiv.textContent = '技術性・アイドル性のキーワードが見つかりませんでした。';
