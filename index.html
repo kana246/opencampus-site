@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>YouTubeコメント分析による音楽動画の価値推定</title>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet" />
   <style>
     html {
       scroll-behavior: smooth;
@@ -25,31 +25,58 @@
       align-items: center;
       position: sticky;
       top: 0;
-      z-index: 999;
+      z-index: 10000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
     header h1 {
       font-size: 1.5rem;
       margin: 0;
     }
     .menu-toggle {
-      font-size: 1.5rem;
+      font-size: 1.8rem;
       cursor: pointer;
+      user-select: none;
+      background: none;
+      border: none;
+      color: white;
     }
+
+    /* ナビメニューはデフォルトは非表示 */
     nav {
       display: none;
+      position: fixed;
+      top: 56px; /* headerの高さ想定 */
+      right: 0;
+      background-color: #303080;
+      width: 220px;
+      padding: 1rem 1.5rem;
+      border-radius: 0 0 0 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+      z-index: 9999;
     }
+    /* メニューオープン時は表示 */
     body.menu-open nav {
       display: block;
-      background-color: #303080;
-      color: white;
-      padding: 1rem 2rem;
     }
+
     nav a {
       display: block;
       color: white;
       text-decoration: none;
       padding: 0.5rem 0;
+      font-weight: 600;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+      transition: background-color 0.3s ease;
     }
+    nav a:last-child {
+      border-bottom: none;
+    }
+    nav a:hover,
+    nav a:focus {
+      background-color: rgba(255, 255, 255, 0.15);
+      outline: none;
+    }
+
     section {
       max-width: 800px;
       margin: 2rem auto;
@@ -69,6 +96,7 @@
       color: #202060;
       border-bottom: 1px solid #ccc;
       padding-bottom: 0.4rem;
+      margin-top: 0;
     }
     ul {
       padding-left: 1.2rem;
@@ -82,10 +110,33 @@
       padding: 2rem;
       text-align: center;
       margin-top: 4rem;
+      font-size: 0.9rem;
+      color: #444;
     }
     footer a {
       color: #202060;
       font-weight: bold;
+      text-decoration: none;
+    }
+    footer a:hover,
+    footer a:focus {
+      text-decoration: underline;
+      outline: none;
+    }
+
+    /* スマホなど小画面対応（ナビを画面幅100%下部に固定表示も可能） */
+    @media (max-width: 600px) {
+      nav {
+        width: 100%;
+        right: 0;
+        top: 56px;
+        border-radius: 0;
+        padding: 1rem;
+      }
+      section {
+        margin: 1rem;
+        padding: 1.5rem;
+      }
     }
   </style>
 </head>
@@ -93,8 +144,9 @@
 
 <header>
   <h1>🎤 YouTubeコメント分析</h1>
-  <div class="menu-toggle">☰</div>
+  <button class="menu-toggle" aria-label="メニューを開閉">☰</button>
 </header>
+
 <nav>
   <a href="#sec0">0. タイトル</a>
   <a href="#sec1">1. 研究背景と目的</a>
@@ -113,7 +165,7 @@
   <p><strong>発表者：</strong> 24B1032 矢野叶</p>
 </section>
 
-<!-- ...（他セクションはそのまま）... -->
+<!-- ここに他のセクションも同様に追加してください -->
 
 <footer>
   <p>2025年6月発表｜制作：矢野叶（湘南工科大学）</p>
@@ -121,9 +173,24 @@
 </footer>
 
 <script>
-  // ハンバーガーメニュー制御
-  document.querySelector('.menu-toggle').addEventListener('click', () => {
+  // ハンバーガーメニュー開閉処理
+  const menuToggle = document.querySelector('.menu-toggle');
+  const nav = document.querySelector('nav');
+
+  menuToggle.addEventListener('click', () => {
     document.body.classList.toggle('menu-open');
+  });
+
+  // メニュー内のリンクをクリックしたらメニューを閉じる
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.body.classList.remove('menu-open');
+    });
+  });
+
+  // ページ読み込み時に必ずトップにスクロール（必要なら）
+  window.addEventListener('load', () => {
+    window.scrollTo(0, 0);
   });
 </script>
 
