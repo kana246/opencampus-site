@@ -7,7 +7,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <style>
-    /* ハンバーガーボタン丸く黒背景 */
     .menu-toggle {
       font-size: 2.8rem;
       width: 56px;
@@ -31,8 +30,6 @@
       background-color: #222;
       outline: none;
     }
-
-    /* ナビゲーションメニュー（初期は隠す） */
     nav.side-menu {
       position: fixed;
       top: 0;
@@ -58,17 +55,19 @@
       transition: border-color 0.3s ease;
     }
     nav.side-menu a:hover {
-      border-bottom: 2px solid #93c5fd; /* 薄い青 */
+      border-bottom: 2px solid #93c5fd;
     }
-
-    /* メニューが開いた状態 */
     nav.side-menu.open {
       transform: translateX(0);
     }
-
-    /* メニュー開閉時にbodyスクロール禁止 */
     body.menu-open {
       overflow: hidden;
+    }
+    img {
+      max-width: 100%;
+      margin: 1rem 0;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
   </style>
 </head>
@@ -80,7 +79,7 @@
 </header>
 
 <nav class="side-menu" aria-hidden="true">
-  <a href="#sec0">0. タイトル</a>
+  <a href="#sec0">タイトル</a>
   <a href="#sec1">1. 研究背景と目的</a>
   <a href="#sec2">2. キーワード例</a>
   <a href="#sec3">3. 評価軸の定義</a>
@@ -93,7 +92,7 @@
 </nav>
 
 <section id="sec0">
-  <h2>0. タイトル</h2>
+  <h2>タイトル</h2>
   <p><strong>発表題目：</strong> YouTubeコメント分析による音楽動画の価値推定</p>
   <p><strong>発表者：</strong> 24B1032 矢野叶</p>
 </section>
@@ -112,7 +111,7 @@
 </section>
 
 <section id="sec3">
-  <h2>3. キーワードとは？</h2>
+  <h2>3. 評価軸の定義</h2>
   <ul>
     <li>YouTubeコメントには膨大なテキストが含まれ、全ての言葉を解析するのは困難</li>
     <li>代表的で意味のある単語（キーワード）を抽出して評価軸を作ることで、効率よく分析が可能</li>
@@ -133,26 +132,31 @@
     <li>コメント全体のスコアを合計して、技術・アイドルの比率を判定</li>
   </ul>
   <p>数百件のコメントを数値的に分析することで、感覚ではなく客観的な評価が可能</p>
+  <img src="images/重みについて.png" alt="重みについての図">
 </section>
 
 <section id="sec5">
-  <h2>5. 結果：技術</h2>
+  <h2>5. 結果：技術性</h2>
   <p>・技術スコア 高 444.0点</p>
   <p>・アイドルスコア 低 259.5点</p>
   <p>視聴者→技術面の魅力を評価。技術的な用語が中心に多く現れており、歌唱力や編集技術が注目されていることがわかる。</p>
-  <p><a href="https://youtu.be/seIWyyGDbgE?si=eiF7bnWqT9NCg3Gc" target="_blank" rel="noopener noreferrer">虹色侍ずまさん 『トウキョウ・シャンディ・ランデヴ』を死に物狂いで歌ってみた。</a></p>
+  <p><a href="https://youtu.be/seIWyyGDbgE?si=eiF7bnWqT9NCg3Gc" target="_blank" rel="noopener noreferrer">虹色侍ずまさん『トウキョウ・シャンディ・ランデヴ』を死に物狂いで歌ってみた。</a></p>
+  <img src="images/ズマ東京シャンディランデブー歌ってみたワード.png" alt="ズマ技術 棒グラフ">
+  <img src="images/ズマ東京シャンディランデブーワード.png" alt="ズマ技術 ワードクラウド">
 </section>
 
 <section id="sec6">
-  <h2>6. 結果：アイドル</h2>
-  <p>・技術スコア 低293.5</p>
-  <p>・アイドルスコア 高439.0</p>
+  <h2>6. 結果：アイドル性</h2>
+  <p>・技術スコア 低 293.5</p>
+  <p>・アイドルスコア 高 439.0</p>
   <p>視聴者→ビジュアルや感情的な魅力を評価。感情的な語が多く、ファンの感情的なつながりが強いことがわかる。可愛いが一番大きく出ている、その子の存在自体を大きく支持してる。</p>
-  <p><a href="https://youtu.be/EfMS3OR2woA?si=zGgU6YPkgGmG0iri" target="_blank" rel="noopener noreferrer">桃鈴ねねさん、『トウキョウ・シャンディ・ランデヴ / MAISONdes full covered by 桃鈴ねね【歌ってみた】』</a></p>
+  <p><a href="https://youtu.be/EfMS3OR2woA?si=zGgU6YPkgGmG0iri" target="_blank" rel="noopener noreferrer">桃鈴ねねさん『トウキョウ・シャンディ・ランデヴ / MAISONdes full covered by 桃鈴ねね』</a></p>
+  <img src="images/ねねち東京シャンディーランデブー棒.png" alt="ねねち アイドル 棒グラフ">
+  <img src="images/ねねち東京シャンディーランデブーワード.png" alt="ねねち アイドル ワードクラウド">
 </section>
 
 <section id="sec7">
-  <h2>9. まとめと今後の展望</h2>
+  <h2>7. まとめと展望</h2>
   <h3>研究まとめ</h3>
   <ul>
     <li>魅力（技術・アイドル性）を数値化</li>
@@ -161,13 +165,13 @@
   </ul>
   <h3>今後の課題・展望</h3>
   <ul>
-    <li>一部の代表的な動画だけでなく、全体傾向を広く捉える必要あり → クラスタリングで「似たタイプの動画群」の発見・分析を進めたい</li>
-    <li>再生数・登録者数との相関など、外的要因との関連性も検証したい</li>
+    <li>クラスタリングで「似たタイプの動画群」の発見・分析</li>
+    <li>再生数・登録者数との相関など外的要因との関連性の検証</li>
   </ul>
 </section>
 
 <section id="sec8">
-  <h2>10. Web公開とデモ体験</h2>
+  <h2>8. Web公開とデモ</h2>
   <p>分析体験・ソース公開しています！この分析ツールは、GitHubとHugging Face Spacesを組み合わせて公開しています。誰でもブラウザ上でYouTubeコメント分析を体験可能！研究の再現性・応用性を意識した設計になっています。</p>
   <p><a href="https://huggingface.co/spaces/kana246/youtubecoment" target="_blank" rel="noopener noreferrer">Hugging Face Spacesで体験デモはこちら</a></p>
 </section>
@@ -184,24 +188,19 @@
   <p>2025年6月発表｜制作：矢野叶（湘南工科大学）</p>
   <p><a href="#sec0">▲ トップへ戻る</a></p>
 </footer>
-<script
-  type="module"
-  src="https://gradio.s3-us-west-2.amazonaws.com/5.34.2/gradio.js"
-></script>
+
+<script type="module" src="https://gradio.s3-us-west-2.amazonaws.com/5.34.2/gradio.js"></script>
 <script>
-  // ハンバーガーメニュー開閉処理
   const menuToggle = document.querySelector('.menu-toggle');
   const nav = document.querySelector('nav.side-menu');
 
   menuToggle.addEventListener('click', () => {
     nav.classList.toggle('open');
     document.body.classList.toggle('menu-open');
-    // aria属性更新
     const isOpen = nav.classList.contains('open');
     nav.setAttribute('aria-hidden', !isOpen);
   });
 
-  // メニュー内のリンクをクリックしたらメニューを閉じる
   nav.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
       nav.classList.remove('open');
@@ -210,7 +209,6 @@
     });
   });
 
-  // ページ読み込み時にトップへスクロール
   window.addEventListener('load', () => {
     window.scrollTo(0, 0);
   });
