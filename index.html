@@ -6,15 +6,80 @@
   <title>YouTubeコメント分析による音楽動画の価値推定</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ハンバーガーボタン丸く黒背景 */
+    .menu-toggle {
+      font-size: 2.8rem;
+      width: 56px;
+      height: 56px;
+      line-height: 56px;
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+      background-color: #000;
+      border: none;
+      color: #fff;
+      position: fixed;
+      top: 12px;
+      right: 16px;
+      z-index: 11000;
+      border-radius: 50%;
+      transition: background-color 0.3s ease;
+    }
+    .menu-toggle:hover,
+    .menu-toggle:focus {
+      background-color: #222;
+      outline: none;
+    }
+
+    /* ナビゲーションメニュー（初期は隠す） */
+    nav.side-menu {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 280px;
+      height: 100vh;
+      background-color: #1e40af;
+      padding: 4rem 2rem;
+      box-shadow: -4px 0 20px rgba(30,64,175,0.4);
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      z-index: 10999;
+      display: flex;
+      flex-direction: column;
+    }
+    nav.side-menu a {
+      color: #fff;
+      font-weight: 700;
+      text-decoration: none;
+      margin-bottom: 1.2rem;
+      font-size: 1.2rem;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.3s ease;
+    }
+    nav.side-menu a:hover {
+      border-bottom: 2px solid #93c5fd; /* 薄い青 */
+    }
+
+    /* メニューが開いた状態 */
+    nav.side-menu.open {
+      transform: translateX(0);
+    }
+
+    /* メニュー開閉時にbodyスクロール禁止 */
+    body.menu-open {
+      overflow: hidden;
+    }
+  </style>
 </head>
 <body>
 
 <header>
   <h1>🎤 YouTubeコメント分析</h1>
-  <button class="menu-toggle" aria-label="メニューを開閉">☰</button>
+  <button class="menu-toggle" aria-label="メニュー開閉">☰</button>
 </header>
 
-<nav>
+<nav class="side-menu" aria-hidden="true">
   <a href="#sec0">0. タイトル</a>
   <a href="#sec1">1. 研究背景と目的</a>
   <a href="#sec2">2. キーワード例</a>
@@ -107,6 +172,17 @@
   <p><a href="https://huggingface.co/spaces/kana246/youtubecoment" target="_blank" rel="noopener noreferrer">Hugging Face Spacesで体験デモはこちら</a></p>
 </section>
 
+<section id="sec9">
+  <h2>9. 体験デモ</h2>
+  <iframe 
+    src="https://huggingface.co/spaces/kana246/youtubecoment" 
+    title="YouTubeコメント分析デモ" 
+    loading="lazy"
+    allowfullscreen
+    style="width: 100%; height: 600px; border: none; border-radius: 12px; box-shadow: 0 15px 35px rgba(30, 64, 175, 0.25);"
+  ></iframe>
+</section>
+
 <footer>
   <p>2025年6月発表｜制作：矢野叶（湘南工科大学）</p>
   <p><a href="#sec0">▲ トップへ戻る</a></p>
@@ -115,16 +191,22 @@
 <script>
   // ハンバーガーメニュー開閉処理
   const menuToggle = document.querySelector('.menu-toggle');
-  const nav = document.querySelector('nav');
+  const nav = document.querySelector('nav.side-menu');
 
   menuToggle.addEventListener('click', () => {
+    nav.classList.toggle('open');
     document.body.classList.toggle('menu-open');
+    // aria属性更新
+    const isOpen = nav.classList.contains('open');
+    nav.setAttribute('aria-hidden', !isOpen);
   });
 
   // メニュー内のリンクをクリックしたらメニューを閉じる
   nav.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
+      nav.classList.remove('open');
       document.body.classList.remove('menu-open');
+      nav.setAttribute('aria-hidden', 'true');
     });
   });
 
