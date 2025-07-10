@@ -135,5 +135,28 @@ a:hover {
   opacity: 1;
 }
 
-/* ふわふわアニメーションのキーフレーム */
+/* ふ.menu-toggle {
+  font-size: 2.8rem;      /* もっと大きく */
+  width: 48px;            /* タップしやすいサイズ */
+  height: 48px;
+  line-height: 48px;      /* 縦中央揃え */
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  background: none;
+  border: none;
+  color: white;
+  position: fixed;        /* スクロールしてもついてくる */
+  top: 12px;
+  right: 16px;
+  z-index: 11000;         /* なるべく前面 */
+  border-radius: 8px;     /* 少し丸み */
+  transition: background-color 0.3s ease;
+}
+.menu-toggle:hover,
+.menu-toggle:focus {
+  background-color: rgba(255, 255, 255, 0.15);
+  outline: none;
+}
+わふわアニメーションのキーフレーム */
 @keyf
