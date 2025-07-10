@@ -69,9 +69,24 @@
       border-radius: 12px;
       box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
+    /* オーバーレイ用 */
+    .overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.2);
+      z-index: 10998;
+      display: none;
+    }
+    .overlay.show {
+      display: block;
+    }
   </style>
 </head>
 <body>
+
+<!-- オーバーレイ -->
+<div class="overlay"></div>
 
 <header>
   <h1>🔴 YouTubeコメント分析</h1>
