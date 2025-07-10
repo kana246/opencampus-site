@@ -193,31 +193,26 @@
 <script>
   const menuToggle = document.querySelector('.menu-toggle');
   const nav = document.querySelector('nav.side-menu');
+  const overlay = document.querySelector('.overlay');
+
+  function closeMenu() {
+    nav.classList.remove('open');
+    document.body.classList.remove('menu-open');
+    nav.setAttribute('aria-hidden', 'true');
+    overlay.classList.remove('show');
+  }
 
   menuToggle.addEventListener('click', () => {
-    nav.classList.toggle('open');
-    document.body.classList.toggle('menu-open');
-    const isOpen = nav.classList.contains('open');
+    const isOpen = nav.classList.toggle('open');
+    document.body.classList.toggle('menu-open', isOpen);
     nav.setAttribute('aria-hidden', !isOpen);
+    overlay.classList.toggle('show', isOpen);
   });
+
+  overlay.addEventListener('click', closeMenu);
 
   nav.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      nav.classList.remove('open');
-      document.body.classList.remove('menu-open');
-      nav.setAttribute('aria-hidden', 'true');
-    });
-  });
-
-  // ✅ メニュー外クリックで閉じる
-  document.addEventListener('click', (e) => {
-    const isInsideMenu = nav.contains(e.target);
-    const isMenuButton = menuToggle.contains(e.target);
-    if (!isInsideMenu && !isMenuButton && nav.classList.contains('open')) {
-      nav.classList.remove('open');
-      document.body.classList.remove('menu-open');
-      nav.setAttribute('aria-hidden', 'true');
-    }
+    link.addEventListener('click', closeMenu);
   });
 
   window.addEventListener('load', () => {
