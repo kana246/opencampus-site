@@ -1,142 +1,154 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>YouTubeコメント分析 発表スライド</title>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouTubeコメント分析スライド</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
   <style>
     body {
       font-family: 'Noto Sans JP', sans-serif;
-      background-color: #101024;
+      background: #101024;
       color: #f0f0f0;
-      padding: 2rem;
-      margin: 0 auto;
-      max-width: 960px;
-      line-height: 1.7;
+      margin: 0;
+      padding: 0;
     }
-    section {
-      background-color: #1e1e3f;
-      border-left: 5px solid #60a5fa;
-      padding: 2rem;
-      border-radius: 12px;
-      margin-bottom: 3rem;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    .slide {
+      padding: 4rem 2rem;
+      min-height: 100vh;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      transition: transform 0.5s ease-in-out;
     }
     h1, h2 {
-      color: #93c5fd;
-      margin-bottom: 1rem;
-    }
-    h1 {
-      font-size: 2rem;
-    }
-    h2 {
-      font-size: 1.5rem;
-    }
-    ul, p {
-      font-size: 1.1rem;
-    }
-    .highlight {
-      background-color: #2c2c54;
-      padding: 1rem;
-      border-radius: 10px;
-      margin-top: 1rem;
-    }
-    a {
       color: #60a5fa;
-      text-decoration: underline;
     }
-    img {
-      max-width: 100%;
-      border-radius: 8px;
+    p, ul {
+      font-size: 1.2rem;
+      margin: 1rem 0;
     }
-    iframe {
-      border: none;
+    ul {
+      padding-left: 1.5rem;
+    }
+    section {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .nav {
+      position: fixed;
+      bottom: 2rem;
       width: 100%;
-      height: 400px;
-      margin-top: 1rem;
-      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 2rem;
+      box-sizing: border-box;
+    }
+    button {
+      background: #60a5fa;
+      color: #fff;
+      border: none;
+      padding: 0.8rem 1.2rem;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
 
-<section>
+<section class="slide" id="slide1">
   <h1>🎤 YouTubeコメント分析による音楽動画の価値推定</h1>
-  <p><strong>発表者：</strong> 矢野 叶（湘南工科大学 人工知能専攻 2年）</p>
+  <p>発表者：矢野叶（湘南工科大学 人工知能専攻 2年）</p>
 </section>
 
-<section>
+<section class="slide" id="slide2">
   <h2>1. 研究背景と目的</h2>
-  <p>VTuberや「歌ってみた」などのUGC市場は拡大し、商業的価値を持つ文化へと進化しています。</p>
-  <p>動画制作においては「技術性」と「アイドル性」のバランスが重要。本研究では、YouTubeコメントを分析して視聴者の評価軸を定量化し、制作戦略に活かすことを目的とします。</p>
+  <p>VTuberや「歌ってみた」などのUGC市場は拡大し、商業的価値を持つ文化へと進化しています。動画制作において「技術性」と「アイドル性」のバランスが重要です。本研究は、YouTubeコメントを分析して視聴者の評価軸を定量化し、制作戦略に活かすことを目的とします。</p>
 </section>
 
-<section>
+<section class="slide" id="slide3">
   <h2>2. キーワードと評価軸</h2>
-  <div class="highlight">
-    <p><strong>技術系キーワード：</strong>歌唱力、編集、プロ、表現力、MIX</p>
-    <p><strong>アイドル系キーワード：</strong>かわいい、推し、尊い、ファンサ、笑顔</p>
-  </div>
-  <p>視聴者が使う言葉を「技術性」または「アイドル性」に分類し、それぞれの価値をスコア化します。</p>
+  <ul>
+    <li>技術系：歌唱力、編集、プロ、表現力、MIXなど</li>
+    <li>アイドル系：かわいい、推し、尊い、ファンサ、笑顔など</li>
+  </ul>
+  <p>評価軸：完成度・職人性を示す「技術性」、ビジュアルや感情的魅力を示す「アイドル性」</p>
 </section>
 
-<section>
+<section class="slide" id="slide4">
   <h2>3. 分析モデルの仕組み</h2>
   <ul>
-    <li>コメントの単語を抽出（形態素解析）</li>
-    <li>単語にスコアを付与（例：かわいい＝アイドル性5点）</li>
-    <li>否定語（例：かわいくない）にはマイナス処理</li>
-    <li>全体スコアを合計し、比率で技術性／アイドル性を判定</li>
+    <li>コメントを形態素解析し単語抽出</li>
+    <li>単語にスコア付与（例：「かわいい」→アイドル性5点）</li>
+    <li>否定語（例：「かわいくない」）にマイナス処理</li>
+    <li>スコアを合算して評価軸を判定</li>
   </ul>
 </section>
 
-<section>
+<section class="slide" id="slide5">
   <h2>4. 分析対象と方法</h2>
   <ul>
-    <li>対象動画：歌ってみた、VTuberのカバー動画</li>
-    <li>YouTube APIで最大1000件のコメントを取得</li>
-    <li>形態素解析＋スコア化＋WordCloud＋形容詞抽出</li>
+    <li>対象：『歌ってみた』とVTuberのカバー動画</li>
+    <li>YouTube APIで最大1000件のコメント取得</li>
+    <li>WordCloud生成、形容詞ターゲット抽出</li>
   </ul>
 </section>
 
-<section>
-  <h2>5. 分析結果（歌ってみた）</h2>
-  <img src="utaite1.png" alt="技術スコアグラフ">
-  <p><strong>技術スコア：</strong>444.0点　/　<strong>アイドルスコア：</strong>259.5点</p>
-  <p>視聴者は編集技術や歌唱力などの完成度を重視しており、技術的評価が高く現れました。</p>
+<section class="slide" id="slide6">
+  <h2>5. 結果①：技術性が強い動画</h2>
+  <p>技術スコア：444.0点 ／ アイドルスコア：259.5点</p>
+  <p>視聴者は歌唱力や編集など完成度を重視。</p>
+  <p>動画：虹色侍ずま『トウキョウ・シャンディ・ランデヴ』</p>
 </section>
 
-<section>
-  <h2>6. 分析結果（VTuber）</h2>
-  <img src="vtuber1.png" alt="アイドルスコアグラフ">
-  <p><strong>技術スコア：</strong>293.5点　/　<strong>アイドルスコア：</strong>439.0点</p>
-  <p>VTuber動画では、感情的・キャラクター的な魅力が支持され、アイドル性の高い傾向を示しました。</p>
+<section class="slide" id="slide7">
+  <h2>6. 結果②：アイドル性が強い動画</h2>
+  <p>技術スコア：293.5点 ／ アイドルスコア：439.0点</p>
+  <p>視聴者はキャラクターや感情的魅力を支持。</p>
+  <p>動画：桃鈴ねね『トウキョウ・シャンディ・ランデヴ / MAISONdes』</p>
 </section>
 
-<section>
-  <h2>7. 考察</h2>
-  <p>「歌ってみた」は完成度や歌唱技術が重視される一方、「VTuber」はビジュアルや感情共鳴による魅力が大きい。</p>
-  <p>この違いは演出や編集方針を考える上で非常に重要な指標となります。</p>
-</section>
-
-<section>
-  <h2>8. まとめと今後の展望</h2>
+<section class="slide" id="slide8">
+  <h2>7. まとめと今後の展望</h2>
   <ul>
-    <li>視聴者の評価軸を「数値化」して可視化</li>
-    <li>VTuberと歌ってみたの評価傾向を比較分析</li>
-    <li>今後はクラスタリングや再生数などの外的要因との関連も検証予定</li>
+    <li>技術性・アイドル性を数値化</li>
+    <li>推し方・評価軸の違いを可視化</li>
+    <li>クラスタリングや再生数との相関分析も予定</li>
   </ul>
 </section>
 
-<section>
-  <h2>9. Web公開と分析デモ</h2>
-  <p>この分析ツールは、GitHubとHugging Face Spacesにて公開中です。誰でもブラウザ上でコメント分析を体験できます。</p>
-  <iframe src="https://kana246-youtubecoment.hf.space"></iframe>
-  <p>QRコードまたは以下のリンクからアクセスできます：</p>
-  <img src="huging.png" alt="QRコード" style="width:150px; height:150px;">
-  <p><a href="https://kana246-youtubecoment.hf.space" target="_blank">→ 分析デモにアクセスする</a></p>
+<section class="slide" id="slide9">
+  <h2>8. デモとWeb公開</h2>
+  <p>分析ツールをHugging Face Spacesで公開</p>
+  <a href="https://kana246-youtubecoment.hf.space" target="_blank">https://kana246-youtubecoment.hf.space</a>
+  <p>誰でもブラウザでコメント分析を体験可能！</p>
 </section>
+
+<div class="nav">
+  <button onclick="prevSlide()">← 戻る</button>
+  <button onclick="nextSlide()">次へ →</button>
+</div>
+
+<script>
+let current = 1;
+const total = 9;
+function showSlide(n) {
+  document.getElementById(`slide${current}`).style.display = 'none';
+  current = n;
+  document.getElementById(`slide${current}`).style.display = 'block';
+}
+function nextSlide() {
+  if (current < total) showSlide(current + 1);
+}
+function prevSlide() {
+  if (current > 1) showSlide(current - 1);
+}
+document.querySelectorAll('.slide').forEach((s, i) => {
+  s.style.display = i === 0 ? 'block' : 'none';
+});
+</script>
 
 </body>
 </html>
