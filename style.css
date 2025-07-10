@@ -1,4 +1,4 @@
-/* ページ全体の横スクロールを防ぐ */
+/* ページ全体の横スクロール防止 */
 body, html {
   margin: 0;
   padding: 0;
@@ -6,7 +6,7 @@ body, html {
   width: 100vw;
 }
 
-/* ハンバーガーメニュー用スタイル */
+/* ハンバーガーメニューのボタン */
 .menu-toggle {
   position: fixed;
   top: 12px;
@@ -38,7 +38,7 @@ nav.side-menu {
   flex-direction: column;
 }
 
-/* メニュー開いた時 */
+/* メニューが開いている状態 */
 nav.side-menu.open {
   transform: translateX(0);
 }
@@ -58,7 +58,7 @@ nav.side-menu a:hover {
   border-bottom: 2px solid #93c5fd;
 }
 
-/* メニュー開いてる時に背景クリック用のオーバーレイ */
+/* メニュー開閉時の背景オーバーレイ */
 .overlay {
   position: fixed;
   top: 0;
@@ -74,7 +74,7 @@ nav.side-menu a:hover {
   display: block;
 }
 
-/* 画像の基本スタイル */
+/* 画像のスタイル */
 img {
   max-width: 100%;
   margin: 1rem 0;
@@ -82,18 +82,22 @@ img {
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
-/* 体験デモセクションの横ズレ防止 */
+/* 体験デモの横ズレ防止 */
 #sec9 {
   max-width: 100vw;
   overflow-x: hidden;
   padding: 0 1rem;
   box-sizing: border-box;
+  margin-left: 0;
+  margin-right: 0;
 }
 
-/* gradio-app埋め込みの横幅調整 */
-gradio-app {
-  display: block;
-  width: 100%;
-  max-width: 100vw;
+/* gradio-app埋め込み部分の調整 */
+#sec9 gradio-app {
+  width: 100% !important;
+  max-width: 100vw !important;
+  margin: 0 auto !important;
   box-sizing: border-box;
+  overflow-x: hidden;
+  display: block;
 }
