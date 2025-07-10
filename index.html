@@ -40,12 +40,10 @@
       border: none;
       color: white;
     }
-
-    /* ナビメニューはデフォルトは非表示 */
     nav {
       display: none;
       position: fixed;
-      top: 56px; /* headerの高さ想定 */
+      top: 56px;
       right: 0;
       background-color: #303080;
       width: 220px;
@@ -54,11 +52,9 @@
       box-shadow: 0 2px 12px rgba(0,0,0,0.3);
       z-index: 9999;
     }
-    /* メニューオープン時は表示 */
     body.menu-open nav {
       display: block;
     }
-
     nav a {
       display: block;
       color: white;
@@ -76,7 +72,6 @@
       background-color: rgba(255, 255, 255, 0.15);
       outline: none;
     }
-
     section {
       max-width: 800px;
       margin: 2rem auto;
@@ -123,8 +118,6 @@
       text-decoration: underline;
       outline: none;
     }
-
-    /* スマホなど小画面対応（ナビを画面幅100%下部に固定表示も可能） */
     @media (max-width: 600px) {
       nav {
         width: 100%;
@@ -137,6 +130,38 @@
         margin: 1rem;
         padding: 1.5rem;
       }
+    }
+
+    /* 体験セクション用 */
+    .demo-form textarea {
+      width: 100%;
+      min-height: 100px;
+      font-size: 1rem;
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      resize: vertical;
+    }
+    .demo-form button {
+      margin-top: 1rem;
+      background-color: #202060;
+      color: white;
+      border: none;
+      padding: 0.7rem 1.5rem;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .demo-form button:hover,
+    .demo-form button:focus {
+      background-color: #303080;
+      outline: none;
+    }
+    .demo-result {
+      margin-top: 1rem;
+      font-weight: bold;
+      color: #202060;
     }
   </style>
 </head>
@@ -157,6 +182,7 @@
   <a href="#sec6">6. 結果：アイドル性</a>
   <a href="#sec7">7. まとめと展望</a>
   <a href="#sec8">8. Web公開とデモ</a>
+  <a href="#sec9">9. 体験デモ</a>
 </nav>
 
 <section id="sec0">
@@ -165,7 +191,17 @@
   <p><strong>発表者：</strong> 24B1032 矢野叶</p>
 </section>
 
-<!-- ここに他のセクションも同様に追加してください -->
+<!-- ここに他のセクションを追加してください -->
+
+<section id="sec9">
+  <h2>9. 体験デモ</h2>
+  <p>以下のテキスト欄にYouTubeコメントの一部を入力して、簡単な「技術性」と「アイドル性」のスコアを体験的に表示します。</p>
+  <form class="demo-form" onsubmit="return false;">
+    <textarea id="comment-input" placeholder="コメントを入力してください（例：歌が上手い！かわいい！...）"></textarea>
+    <button id="analyze-btn">分析する</button>
+  </form>
+  <div class="demo-result" id="demo-result"></div>
+</section>
 
 <footer>
   <p>2025年6月発表｜制作：矢野叶（湘南工科大学）</p>
@@ -188,9 +224,58 @@
     });
   });
 
-  // ページ読み込み時に必ずトップにスクロール（必要なら）
+  // ページ読み込み時に必ずトップにスクロール
   window.addEventListener('load', () => {
     window.scrollTo(0, 0);
+  });
+
+  // 体験デモの簡易分析処理（例：単語数でスコアを簡単計算）
+  const analyzeBtn = document.getElementById('analyze-btn');
+  const commentInput = document.getElementById('comment-input');
+  const resultDiv = document.getElementById('demo-result');
+
+  analyzeBtn.addEventListener('click', () => {
+    const text = commentInput.value.trim();
+    if (!text) {
+      resultDiv.textContent = 'コメントを入力してください。';
+      return;
+    }
+
+    // 簡単な判定ルール例
+    // 技術性キーワード例
+    const techWords = ['歌', '上手い', '声', '演奏', '技術', '巧み', 'プロ', 'うまい'];
+    // アイドル性キーワード例
+    const idolWords = ['かわいい', 'かっこいい', '好き', '応援', 'ファン', '尊い', '愛してる', '最高'];
+
+    let techScore = 0;
+    let idolScore = 0;
+
+    // キーワードごとに含まれている回数をカウント
+    techWords.forEach(word => {
+      const re = new RegExp(word, 'g');
+      const matches = text.match(re);
+      if (matches) techScore += matches.length;
+    });
+    idolWords.forEach(word => {
+      const re = new RegExp(word, 'g');
+      const matches = text.match(re);
+      if (matches) idolScore += matches.length;
+    });
+
+    // 結果表示（スコアを%表示風に）
+    const total = techScore + idolScore;
+    if (total === 0) {
+      resultDiv.textContent = '技術性・アイドル性のキーワードが見つかりませんでした。';
+      return;
+    }
+    const techPercent = Math.round((techScore / total) * 100);
+    const idolPercent = 100 - techPercent;
+
+    resultDiv.innerHTML = `
+      <p>技術性スコア: <strong>${techScore} (${techPercent}%)</strong></p>
+      <p>アイドル性スコア: <strong>${idolScore} (${idolPercent}%)</strong></p>
+      <p>※これは簡易デモです。実際の分析ではより高度なモデルを使用します。</p>
+    `;
   });
 </script>
 
