@@ -1,179 +1,138 @@
-/* ベースリセット＋フォント */
-body {
-  font-family: 'Noto Sans JP', sans-serif;
-  background-color: #fff;
-  color: #222;
-  line-height: 1.8;
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 4rem 2rem;
-}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>YouTubeコメント分析による音楽動画の価値推定</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
 
-/* セクション */
-section {
-  padding: 3rem 2rem;
-  margin-bottom: 6rem;
-  border-left: 6px solid #1e40af; /* 濃い青のアクセント */
-  background: #fafafa;
-  box-shadow: 0 6px 20px rgba(30, 64, 175, 0.1);
-  border-radius: 12px;
-  transition: box-shadow 0.3s ease;
-}
-section:hover {
-  box-shadow: 0 8px 30px rgba(30, 64, 175, 0.15);
-}
+<header>
+  <h1>🎤 YouTubeコメント分析</h1>
+  <button class="menu-toggle" aria-label="メニューを開閉">☰</button>
+</header>
 
-/* タイトル */
-h1, h2 {
-  color: #1e40af;
-  margin-bottom: 1.5rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-}
+<nav>
+  <a href="#sec0">0. タイトル</a>
+  <a href="#sec1">1. 研究背景と目的</a>
+  <a href="#sec2">2. キーワード例</a>
+  <a href="#sec3">3. 評価軸の定義</a>
+  <a href="#sec4">4. 分析モデルの仕組み</a>
+  <a href="#sec5">5. 結果：技術性</a>
+  <a href="#sec6">6. 結果：アイドル性</a>
+  <a href="#sec7">7. まとめと展望</a>
+  <a href="#sec8">8. Web公開とデモ</a>
+  <a href="#sec9">9. 体験デモ</a>
+</nav>
 
-/* 段落、リスト */
-p, ul {
-  font-size: 1.15rem;
-  margin-bottom: 1.5rem;
-  color: #444;
-}
-ul {
-  padding-left: 1.5rem;
-}
-ul li {
-  margin-bottom: 0.75rem;
-}
+<section id="sec0">
+  <h2>0. タイトル</h2>
+  <p><strong>発表題目：</strong> YouTubeコメント分析による音楽動画の価値推定</p>
+  <p><strong>発表者：</strong> 24B1032 矢野叶</p>
+</section>
 
-/* 強調 */
-.highlight {
-  background-color: #dbeafe; /* 薄い青 */
-  padding: 1rem 1.5rem;
-  border-radius: 10px;
-  margin-top: 1.5rem;
-  font-weight: 700;
-  color: #1e40af;
-}
+<section id="sec1">
+  <h2>1. 研究背景と目的</h2>
+  <p>近年、VTuberや「歌ってみた」などのtiktok・youtube市場は急速に拡大し、単なる趣味的文化から商業的価値へと変化している。動画制作側は「技術性」と「アイドル性」という二つの異なる評価軸でファンの支持を得る必要があり、そのバランスが重要。本研究では、YouTubeコメントを通じて視聴者の評価軸を定量的に把握し、制作・マーケティング戦略に役立てることを目的としている。</p>
+</section>
 
-/* 画像 */
-img {
-  max-width: 100%;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(30, 64, 175, 0.12);
-}
+<section id="sec2">
+  <h2>2. キーワード例</h2>
+  <h3>技術系キーワード</h3>
+  <p>例：歌唱力、編集、プロ、表現力、MIXなど</p>
+  <h3>アイドル系キーワード</h3>
+  <p>例：かわいい、推し、尊い、ファンサ、笑顔など</p>
+</section>
 
-/* iframe */
-iframe {
-  border: none;
-  border-radius: 12px;
-  width: 100%;
-  height: 450px;
-  margin-top: 2rem;
-  box-shadow: 0 4px 20px rgba(30, 64, 175, 0.1);
-}
+<section id="sec3">
+  <h2>3. キーワードとは？</h2>
+  <ul>
+    <li>YouTubeコメントには膨大なテキストが含まれ、全ての言葉を解析するのは困難</li>
+    <li>代表的で意味のある単語（キーワード）を抽出して評価軸を作ることで、効率よく分析が可能</li>
+    <li>キーワードは視聴者が「技術的評価」や「アイドル的評価」を表現するときに多用する単語群</li>
+  </ul>
+  <h3>評価軸とは？〜アイドル性と技術性</h3>
+  <p><strong>技術性：</strong>歌唱力・編集技術・表現力など、作品の「完成度」や「職人性」に関わる魅力</p>
+  <p><strong>アイドル性：</strong>ビジュアル・感情的魅力・キャラ性など、視聴者が「推したくなる」魅力</p>
+  <p>YouTubeコメントには両方の価値軸が混在しており、どちらがより多く現れているかで動画の評価タイプを推定</p>
+</section>
 
-/* リンク */
-a {
-  color: #1e40af;
-  font-weight: 700;
-  text-decoration: none;
-  border-bottom: 2px solid transparent;
-  transition: border-color 0.3s ease;
-}
-a:hover {
-  border-bottom: 2px solid #1e40af;
-}
+<section id="sec4">
+  <h2>4. 分析モデルの仕組み</h2>
+  <ul>
+    <li>コメント内の単語を分割→「かわいい」「歌唱力」などの単語を抽出</li>
+    <li>単語に「重み（重要度）」を設定→「かわいい」＝アイドル性5点、「歌唱力」＝技術性2点</li>
+    <li>「かわいくない」などの否定語がある場合はマイナス</li>
+    <li>コメント全体のスコアを合計して、技術・アイドルの比率を判定</li>
+  </ul>
+  <p>数百件のコメントを数値的に分析することで、感覚ではなく客観的な評価が可能</p>
+</section>
 
-/* フレックスでタイトル横ロゴ */
-.title-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.title-header h1 {
-  flex: 1;
-  font-size: 2.2rem;
-  line-height: 1.3;
-}
-.title-header img {
-  width: 120px;
-  margin-left: 2rem;
-  filter: drop-shadow(0 1px 1px rgba(0,0,0,0.1));
-  border-radius: 8px;
-}
+<section id="sec5">
+  <h2>5. 結果：技術</h2>
+  <p>・技術スコア 高 444.0点</p>
+  <p>・アイドルスコア 低 259.5点</p>
+  <p>視聴者→技術面の魅力を評価。技術的な用語が中心に多く現れており、歌唱力や編集技術が注目されていることがわかる。</p>
+  <p><a href="https://youtu.be/seIWyyGDbgE?si=eiF7bnWqT9NCg3Gc" target="_blank" rel="noopener noreferrer">虹色侍ずまさん 『トウキョウ・シャンディ・ランデヴ』を死に物狂いで歌ってみた。</a></p>
+</section>
 
-/* フッター風ロゴ右下固定 */
-.logo-bottom-right {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 90px;
-  opacity: 0.75;
-  transition: opacity 0.3s ease;
-  cursor: pointer;
-}
-.logo-bottom-right:hover {
-  opacity: 1;
-}
+<section id="sec6">
+  <h2>6. 結果：アイドル</h2>
+  <p>・技術スコア 低293.5</p>
+  <p>・アイドルスコア 高439.0</p>
+  <p>視聴者→ビジュアルや感情的な魅力を評価。感情的な語が多く、ファンの感情的なつながりが強いことがわかる。可愛いが一番大きく出ている、その子の存在自体を大きく支持してる。</p>
+  <p><a href="https://youtu.be/EfMS3OR2woA?si=zGgU6YPkgGmG0iri" target="_blank" rel="noopener noreferrer">桃鈴ねねさん、『トウキョウ・シャンディ・ランデヴ / MAISONdes full covered by 桃鈴ねね【歌ってみた】』</a></p>
+</section>
 
+<section id="sec7">
+  <h2>9. まとめと今後の展望</h2>
+  <h3>研究まとめ</h3>
+  <ul>
+    <li>魅力（技術・アイドル性）を数値化</li>
+    <li>VTuberと歌ってみたの傾向の違いを明確化</li>
+    <li>視聴者の「推し方」や「評価軸」の可視化が可能に</li>
+  </ul>
+  <h3>今後の課題・展望</h3>
+  <ul>
+    <li>一部の代表的な動画だけでなく、全体傾向を広く捉える必要あり → クラスタリングで「似たタイプの動画群」の発見・分析を進めたい</li>
+    <li>再生数・登録者数との相関など、外的要因との関連性も検証したい</li>
+  </ul>
+</section>
 
-/* ふわふわアニメーションのキーフレーム */
-@keyframes floatUpDown {
-  0%, 100% {
-    transform: translateY(0);
-    box-shadow: 0 12px 30px rgba(30, 64, 175, 0.25);
-  }
-  50% {
-    transform: translateY(-15px);
-    box-shadow: 0 20px 40px rgba(30, 64, 175, 0.35);
-  }
-}
+<section id="sec8">
+  <h2>10. Web公開とデモ体験</h2>
+  <p>分析体験・ソース公開しています！この分析ツールは、GitHubとHugging Face Spacesを組み合わせて公開しています。誰でもブラウザ上でYouTubeコメント分析を体験可能！研究の再現性・応用性を意識した設計になっています。</p>
+  <p><a href="https://huggingface.co/spaces/kana246/youtubecoment" target="_blank" rel="noopener noreferrer">Hugging Face Spacesで体験デモはこちら</a></p>
+</section>
 
-/* セクションにふわふわアニメーションと強めの影 */
-section {
-  padding: 3rem 2rem;
-  margin-bottom: 6rem;
-  border-left: 6px solid #1e40af;
-  background: #fafafa;
-  border-radius: 12px;
+<footer>
+  <p>2025年6月発表｜制作：矢野叶（湘南工科大学）</p>
+  <p><a href="#sec0">▲ トップへ戻る</a></p>
+</footer>
 
-  /* ふわふわアニメーション */
-  animation: floatUpDown 5s ease-in-out infinite;
+<script>
+  // ハンバーガーメニュー開閉処理
+  const menuToggle = document.querySelector('.menu-toggle');
+  const nav = document.querySelector('nav');
 
-  /* 強い影 */
-  box-shadow: 0 12px 30px rgba(30, 64, 175, 0.25);
-  transition: box-shadow 0.3s ease;
-}
+  menuToggle.addEventListener('click', () => {
+    document.body.classList.toggle('menu-open');
+  });
 
-section:hover {
-  /* さらに強めの影でホバー時の分かりやすさUP */
-  box-shadow: 0 25px 50px rgba(30, 64, 175, 0.45);
-  animation-play-state: paused; /* ホバー時は動きを止めて安定させる */
-}
+  // メニュー内のリンクをクリックしたらメニューを閉じる
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.body.classList.remove('menu-open');
+    });
+  });
 
-/* 画像の影も強めに */
-img {
-  max-width: 100%;
-  border-radius: 10px;
-  box-shadow: 0 10px 25px rgba(30, 64, 175, 0.3);
-  transition: box-shadow 0.3s ease;
-}
+  // ページ読み込み時にトップへスクロール
+  window.addEventListener('load', () => {
+    window.scrollTo(0, 0);
+  });
+</script>
 
-img:hover {
-  box-shadow: 0 18px 40px rgba(30, 64, 175, 0.45);
-}
-
-/* iframe影 */
-iframe {
-  border: none;
-  border-radius: 12px;
-  width: 100%;
-  height: 450px;
-  margin-top: 2rem;
-  box-shadow: 0 15px 35px rgba(30, 64, 175, 0.25);
-  transition: box-shadow 0.3s ease;
-}
-
-iframe:hover {
-  box-shadow: 0 25px 50px rgba(30, 64, 175, 0.40);
-}
-
+</body>
+</html>
