@@ -3,171 +3,166 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>YouTubeコメント分析スライド</title>
+  <title>YouTubeコメント分析による音楽動画の価値推定</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
   <style>
     body {
       font-family: 'Noto Sans JP', sans-serif;
-      background: #101024;
-      color: #f0f0f0;
       margin: 0;
       padding: 0;
+      background-color: #fff;
+      color: #111;
     }
-    .slide {
-      padding: 4rem 2rem;
-      min-height: 100vh;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      transition: transform 0.5s ease-in-out;
-    }
-    h1, h2 {
-      color: #60a5fa;
-    }
-    p, ul {
-      font-size: 1.2rem;
-      margin: 1rem 0;
-    }
-    ul {
-      padding-left: 1.5rem;
-    }
-    section {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-    .nav {
-      position: fixed;
-      bottom: 2rem;
-      width: 100%;
+    header {
+      background-color: #202060;
+      color: white;
+      padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
-      padding: 0 2rem;
-      box-sizing: border-box;
+      align-items: center;
     }
-    button {
-      background: #60a5fa;
-      color: #fff;
-      border: none;
-      padding: 0.8rem 1.2rem;
-      font-size: 1rem;
-      border-radius: 5px;
+    header h1 {
+      font-size: 1.5rem;
+      margin: 0;
+    }
+    nav {
+      display: none;
+    }
+    .menu-toggle {
+      font-size: 1.5rem;
       cursor: pointer;
+    }
+    .menu-open nav {
+      display: block;
+      background-color: #303080;
+      color: white;
+      padding: 1rem 2rem;
+    }
+    nav a {
+      display: block;
+      color: white;
+      text-decoration: none;
+      padding: 0.5rem 0;
+    }
+    section {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 1rem 2rem;
+      background-color: #fdfdfd;
+      border-left: 5px solid #202060;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #202060;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 0.4rem;
+    }
+    ul {
+      padding-left: 1.2rem;
+    }
+    a {
+      color: #202060;
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
 
-<section class="slide" id="slide1">
-  <h1>🎤 YouTubeコメント分析による音楽動画の価値推定</h1>
-  <p>発表者：矢野叶（湘南工科大学 人工知能専攻 2年）</p>
+<header>
+  <h1>🎤 YouTubeコメント分析</h1>
+  <div class="menu-toggle" onclick="document.body.classList.toggle('menu-open')">☰</div>
+</header>
+<nav>
+  <a href="#sec1">研究背景</a>
+  <a href="#sec2">キーワード</a>
+  <a href="#sec3">分析モデル</a>
+  <a href="#sec4">対象と方法</a>
+  <a href="#sec5">結果：技術</a>
+  <a href="#sec6">結果：アイドル</a>
+  <a href="#sec7">まとめと展望</a>
+  <a href="#sec8">Web公開</a>
+</nav>
+
+<section id="sec0">
+  <h2>タイトル</h2>
+  <p><strong>発表題目：</strong> YouTubeコメント分析による音楽動画の価値推定</p>
+  <p><strong>発表者：</strong> 24B1032 矢野叶</p>
 </section>
 
-<section class="slide" id="slide2">
+<section id="sec1">
   <h2>1. 研究背景と目的</h2>
-  <p>VTuberや「歌ってみた」などのUGC（User Generated Content）市場は、近年急速に拡大しています。これらの動画コンテンツは、従来の趣味的な表現にとどまらず、商業的な影響力をもつようになりました。</p>
-  <p>動画制作においては、視聴者からの評価を得るために「技術性」と「アイドル性」という2つの異なる魅力を適切に発揮する必要があります。本研究は、YouTubeコメントに着目し、そこに表れる評価軸を定量的に分析することで、制作やマーケティング戦略に役立つ知見を得ることを目的とします。</p>
+  <p>近年、VTuberや「歌ってみた」などのTikTok・YouTube市場は急速に拡大し、単なる趣味的文化から商業的価値へと変化している。動画制作側は「技術性」と「アイドル性」という二つの異なる評価軸でファンの支持を得る必要があり、そのバランスが重要である。</p>
+  <p>本研究では、YouTubeコメントを通じて視聴者の評価軸を定量的に把握し、制作・マーケティング戦略に役立てることを目的としている。</p>
 </section>
 
-<section class="slide" id="slide3">
-  <h2>2. キーワードと評価軸の概念</h2>
-  <p>評価軸とは、視聴者が動画をどのように捉えているかを示すものであり、以下の2種類に分類されます：</p>
+<section id="sec2">
+  <h2>2. キーワード例</h2>
   <ul>
-    <li><strong>技術性：</strong> 歌唱力、編集技術、表現力、MIX など作品の完成度や職人性に関わる魅力</li>
-    <li><strong>アイドル性：</strong> かわいさ、ファンサービス、感情的な魅力、キャラクター性など、視聴者が「推したくなる」魅力</li>
+    <li><strong>技術系キーワード：</strong> 歌唱力、編集、プロ、表現力、MIXなど</li>
+    <li><strong>アイドル系キーワード：</strong> かわいい、推し、尊い、ファンサ、笑顔など</li>
   </ul>
 </section>
 
-<section class="slide" id="slide4">
-  <h2>3. キーワードとは？</h2>
-  <p>YouTubeコメントは膨大なテキストで構成されています。すべての語を同等に扱うのは非効率であるため、本研究では「評価に関連する代表的な単語＝キーワード」に着目します。</p>
+<section id="sec3">
+  <h2>3. キーワード・評価軸の定義</h2>
   <ul>
-    <li>技術系キーワード例：歌唱力、編集、プロ、表現力、MIX</li>
-    <li>アイドル系キーワード例：かわいい、推し、尊い、ファンサ、笑顔</li>
+    <li>YouTubeコメントには膨大なテキストが含まれ、全てを解析するのは困難</li>
+    <li>意味のある単語（キーワード）を抽出し、評価軸を作ることで効率的に分析</li>
+    <li>技術性：作品の完成度や職人性に関わる魅力</li>
+    <li>アイドル性：ビジュアル・感情的魅力・キャラ性などの“推したくなる”魅力</li>
   </ul>
-  <p>これらのキーワードの出現頻度とスコアをもとに、コメントの内容を評価軸にマッピングします。</p>
 </section>
 
-<section class="slide" id="slide5">
+<section id="sec4">
   <h2>4. 分析モデルの仕組み</h2>
   <ul>
-    <li>形態素解析によりコメントを単語単位に分割</li>
-    <li>抽出された単語にスコアを割り当て（例：「かわいい」→アイドル性5点）</li>
-    <li>否定語（例：「かわいくない」）がある場合は減点処理</li>
-    <li>1件ごとのコメントから合計スコアを算出し、全体を平均</li>
+    <li>コメント内の単語を分割 → 例：「かわいい」「歌唱力」などを抽出</li>
+    <li>単語に重み（例：「かわいい」＝アイドル性5点）を設定</li>
+    <li>否定語がある場合はマイナス評価</li>
+    <li>コメント全体のスコア合計で技術性・アイドル性の比率を判定</li>
   </ul>
-  <p>これにより、動画に対する視聴者の評価傾向を定量的に把握可能となります。</p>
 </section>
 
-<section class="slide" id="slide6">
-  <h2>5. 分析対象と方法</h2>
+<section id="sec5">
+  <h2>5. 結果：技術性が高い動画</h2>
   <ul>
-    <li>対象動画：歌ってみた動画およびVTuberによる音楽カバー</li>
-    <li>コメント取得：YouTube APIを用い、最大1000件のコメントを収集</li>
-    <li>自然言語処理：形態素解析によりキーワードを抽出</li>
-    <li>可視化：WordCloudや形容詞抽出によって特徴を視覚的に表現</li>
+    <li>技術スコア：444.0点</li>
+    <li>アイドルスコア：259.5点</li>
+    <li>技術的な用語が多く、歌唱力や編集技術が注目された</li>
+    <li>対象動画：虹色侍ずま『トウキョウ・シャンディ・ランデヴ』<br>
+      <a href="https://youtu.be/seIWyyGDbgE?si=eiF7bnWqT9NCg3Gc" target="_blank">動画リンク</a></li>
   </ul>
 </section>
 
-<section class="slide" id="slide7">
-  <h2>6. 結果①：技術性が強く評価された動画</h2>
-  <p>技術スコア：444.0点 ／ アイドルスコア：259.5点</p>
-  <p>「歌唱力」「編集」「ハモリ」などの単語が多く見られ、視聴者は完成度の高さを重視していると考えられます。</p>
-  <p>対象動画：虹色侍ずま『トウキョウ・シャンディ・ランデヴ』</p>
-  <a href="https://youtu.be/seIWyyGDbgE?si=eiF7bnWqT9NCg3Gc" target="_blank">YouTubeリンク</a>
-</section>
-
-<section class="slide" id="slide8">
-  <h2>7. 結果②：アイドル性が強く評価された動画</h2>
-  <p>技術スコア：293.5点 ／ アイドルスコア：439.0点</p>
-  <p>「かわいい」「尊い」「癒やされる」といった語が多数出現し、視聴者はキャラクターへの愛着や感情的魅力に反応していることがわかります。</p>
-  <p>対象動画：桃鈴ねね『トウキョウ・シャンディ・ランデヴ / MAISONdes』</p>
-  <a href="https://youtu.be/EfMS3OR2woA?si=zGgU6YPkgGmG0iri" target="_blank">YouTubeリンク</a>
-</section>
-
-<section class="slide" id="slide9">
-  <h2>8. 考察</h2>
-  <p>「歌ってみた」では、歌唱力や表現力といった完成度への注目が強く、「VTuber動画」ではビジュアルや感情的共感に基づく支持が中心でした。</p>
-  <p>このような評価軸の違いは、視聴者が動画に求めている価値の違いを反映しており、動画制作時の演出や編集方針に影響を与える示唆が得られました。</p>
-</section>
-
-<section class="slide" id="slide10">
-  <h2>9. まとめと今後の展望</h2>
+<section id="sec6">
+  <h2>6. 結果：アイドル性が高い動画</h2>
   <ul>
-    <li>本研究ではコメント分析により、視聴者が感じる技術性・アイドル性を数値化し比較できることを示した。</li>
-    <li>動画の「評価タイプ」の分類が可能となり、制作者へのフィードバック指標となり得る。</li>
-    <li>今後はクラスタリング分析による傾向分類や、再生数・登録者数など他指標との相関分析も検討する。</li>
+    <li>技術スコア：293.5点</li>
+    <li>アイドルスコア：439.0点</li>
+    <li>感情的な語が多く、ファンとの感情的なつながりが強い</li>
+    <li>対象動画：桃鈴ねね『トウキョウ・シャンディ・ランデヴ / MAISONdes』<br>
+      <a href="https://youtu.be/EfMS3OR2woA?si=zGgU6YPkgGmG0iri" target="_blank">動画リンク</a></li>
   </ul>
 </section>
 
-<section class="slide" id="slide11">
-  <h2>10. デモとWeb公開</h2>
-  <p>この研究に用いた分析ツールは、GitHubとHugging Face Spacesを活用して公開しています。誰でもYouTubeの動画URLを入力することで、技術性／アイドル性のスコアを可視化体験できます。</p>
+<section id="sec7">
+  <h2>7. まとめと今後の展望</h2>
+  <ul>
+    <li>魅力（技術性・アイドル性）を数値化し、視聴者の評価軸の可視化に成功</li>
+    <li>VTuberと歌ってみたの傾向の違いを明確化</li>
+    <li>今後はクラスタリングや登録者数との相関分析など外的要因の検証も予定</li>
+  </ul>
+</section>
+
+<section id="sec8">
+  <h2>8. Web公開とデモ体験</h2>
+  <p>分析ツールはHugging Face Spacesで公開中。誰でもブラウザ上でYouTubeコメントの分析体験が可能です。</p>
   <a href="https://kana246-youtubecoment.hf.space" target="_blank">https://kana246-youtubecoment.hf.space</a>
 </section>
 
-<div class="nav">
-  <button onclick="prevSlide()">← 戻る</button>
-  <button onclick="nextSlide()">次へ →</button>
-</div>
-
 <script>
-let current = 1;
-const total = 11;
-function showSlide(n) {
-  document.getElementById(`slide${current}`).style.display = 'none';
-  current = n;
-  document.getElementById(`slide${current}`).style.display = 'block';
-}
-function nextSlide() {
-  if (current < total) showSlide(current + 1);
-}
-function prevSlide() {
-  if (current > 1) showSlide(current - 1);
-}
-document.querySelectorAll('.slide').forEach((s, i) => {
-  s.style.display = i === 0 ? 'block' : 'none';
-});
+  // ハンバーガーメニュー制御済み
 </script>
 
 </body>
