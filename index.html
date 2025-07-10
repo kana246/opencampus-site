@@ -6,43 +6,6 @@
   <title>🔴YouTubeコメント分析による音楽動画の価値推定</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
-  <style>
-    /* メニューのボタン補足 */
-    .menu-toggle {
-      font-size: 2.8rem;
-      width: 56px;
-      height: 56px;
-      line-height: 56px;
-      text-align: center;
-      cursor: pointer;
-      user-select: none;
-      background-color: #000;
-      border: none;
-      color: #fff;
-      position: fixed;
-      top: 12px;
-      right: 16px;
-      z-index: 11000;
-      border-radius: 50%;
-      transition: background-color 0.3s ease;
-    }
-    .menu-toggle:hover,
-    .menu-toggle:focus {
-      background-color: #222;
-      outline: none;
-    }
-    .overlay {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      background: rgba(0,0,0,0.2);
-      z-index: 10998;
-      display: none;
-    }
-    .overlay.show {
-      display: block;
-    }
-  </style>
 </head>
 <body>
 
@@ -66,7 +29,98 @@
   <a href="#sec9">9. 体験デモ</a>
 </nav>
 
-<!-- セクション省略（同じ内容） -->
+<section id="sec0">
+  <h2>タイトル</h2>
+  <p><strong>発表題目：</strong> YouTubeコメント分析による音楽動画の価値推定</p>
+  <p><strong>発表者：</strong> 24B1032 矢野叶</p>
+</section>
+
+<section id="sec1">
+  <h2>1. 研究背景と目的</h2>
+  <p>近年、VTuberや「歌ってみた」などのtiktok・youtube市場は急速に拡大し、単なる趣味的文化から商業的価値へと変化している。動画制作側は「技術性」と「アイドル性」という二つの異なる評価軸でファンの支持を得る必要があり、そのバランスが重要。本研究では、YouTubeコメントを通じて視聴者の評価軸を定量的に把握し、制作・マーケティング戦略に役立てることを目的としている。</p>
+</section>
+
+<section id="sec2">
+  <h2>2. キーワード例</h2>
+  <h3>技術系キーワード</h3>
+  <p>例：歌唱力、編集、プロ、表現力、MIXなど</p>
+  <h3>アイドル系キーワード</h3>
+  <p>例：かわいい、推し、尊い、ファンサ、笑顔など</p>
+</section>
+
+<section id="sec3">
+  <h2>3. 評価軸の定義</h2>
+  <ul>
+    <li>YouTubeコメントには膨大なテキストが含まれ、全ての言葉を解析するのは困難</li>
+    <li>代表的で意味のある単語（キーワード）を抽出して評価軸を作ることで、効率よく分析が可能</li>
+    <li>キーワードは視聴者が「技術的評価」や「アイドル的評価」を表現するときに多用する単語群</li>
+  </ul>
+  <h3>評価軸とは？〜アイドル性と技術性</h3>
+  <p><strong>技術性：</strong>歌唱力・編集技術・表現力など、作品の「完成度」や「職人性」に関わる魅力</p>
+  <p><strong>アイドル性：</strong>ビジュアル・感情的魅力・キャラ性など、視聴者が「推したくなる」魅力</p>
+  <p>YouTubeコメントには両方の価値軸が混在しており、どちらがより多く現れているかで動画の評価タイプを推定</p>
+</section>
+
+<section id="sec4">
+  <h2>4. 分析モデルの仕組み</h2>
+  <ul>
+    <li>コメント内の単語を分割→「かわいい」「歌唱力」などの単語を抽出</li>
+    <li>単語に「重み（重要度）」を設定→「かわいい」＝アイドル性5点、「歌唱力」＝技術性2点</li>
+    <li>「かわいくない」などの否定語がある場合はマイナス</li>
+    <li>コメント全体のスコアを合計して、技術・アイドルの比率を判定</li>
+  </ul>
+  <p>数百件のコメントを数値的に分析することで、感覚ではなく客観的な評価が可能</p>
+  <img src="images/weight.png" alt="重みについての図" />
+</section>
+
+<section id="sec5">
+  <h2>5. 結果：技術性</h2>
+  <p>・技術スコア 高 444.0点</p>
+  <p>・アイドルスコア 低 259.5点</p>
+  <p>視聴者→技術面の魅力を評価。技術的な用語が中心に多く現れており、歌唱力や編集技術が注目されていることがわかる。</p>
+  <p><a href="https://youtu.be/seIWyyGDbgE?si=eiF7bnWqT9NCg3Gc" target="_blank" rel="noopener noreferrer">虹色侍ずまさん『トウキョウ・シャンディ・ランデヴ』を死に物狂いで歌ってみた。</a></p>
+  <img src="images/zuma_bar.png" alt="ズマ技術 棒グラフ" />
+  <img src="images/zuma_wordcloud.png" alt="ズマ技術 ワードクラウド" />
+</section>
+
+<section id="sec6">
+  <h2>6. 結果：アイドル性</h2>
+  <p>・技術スコア 低 293.5</p>
+  <p>・アイドルスコア 高 439.0</p>
+  <p>視聴者→ビジュアルや感情的な魅力を評価。感情的な語が多く、ファンの感情的なつながりが強いことがわかる。可愛いが一番大きく出ている、その子の存在自体を大きく支持してる。</p>
+  <p><a href="https://youtu.be/EfMS3OR2woA?si=zGgU6YPkgGmG0iri" target="_blank" rel="noopener noreferrer">桃鈴ねねさん『トウキョウ・シャンディ・ランデヴ / MAISONdes full covered by 桃鈴ねね』</a></p>
+  <img src="images/nene_bar.png" alt="ねねち アイドル 棒グラフ" />
+  <img src="images/nene_wordcloud.png" alt="ねねち アイドル ワードクラウド" />
+</section>
+
+<section id="sec7">
+  <h2>7. まとめと展望</h2>
+  <h3>研究まとめ</h3>
+  <ul>
+    <li>魅力（技術・アイドル性）を数値化</li>
+    <li>VTuberと歌ってみたの傾向の違いを明確化</li>
+    <li>視聴者の「推し方」や「評価軸」の可視化が可能に</li>
+  </ul>
+  <h3>今後の課題・展望</h3>
+  <ul>
+    <li>クラスタリングで「似たタイプの動画群」の発見・分析</li>
+    <li>再生数・登録者数との相関など外的要因との関連性の検証</li>
+  </ul>
+</section>
+
+<section id="sec8">
+  <h2>8. Web公開とデモ</h2>
+  <p>分析体験・ソース公開しています！この分析ツールは、GitHubとHugging Face Spacesを組み合わせて公開しています。誰でもブラウザ上でYouTubeコメント分析を体験可能！研究の再現性・応用性を意識した設計になっています。</p>
+  <p><a href="https://huggingface.co/spaces/kana246/youtubecoment" target="_blank" rel="noopener noreferrer">Hugging Face Spacesで体験デモはこちら</a></p>
+</section>
+
+<section id="sec9">
+  <h2>9. 体験デモ</h2>
+  <gradio-app 
+    src="https://kana246-youtubecoment.hf.space" 
+    style="width: 100%; height: 600px; border-radius: 12px; box-shadow: 0 15px 35px rgba(30, 64, 175, 0.25);"
+  ></gradio-app>
+</section>
 
 <footer>
   <p>2025年6月発表｜制作：矢野叶（湘南工科大学）</p>
