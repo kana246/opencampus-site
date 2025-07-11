@@ -5,11 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>🔴YouTubeコメント分析による音楽動画の価値推定</title>
 
-<!-- フォント -->
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet" />
 
 <style>
-  /* Reset */
   *, *::before, *::after {
     box-sizing: border-box;
   }
@@ -25,7 +23,7 @@
   body {
     background: #f8fafc;
     line-height: 1.7;
-    padding-top: 72px; /* ヘッダー分 */
+    padding-top: 72px;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -37,7 +35,8 @@
     position: fixed;
     top: 0; left: 0;
     width: 100%;
-    background: linear-gradient(90deg, #1e3a8a, #3b82f6);
+    /* ここだけグラデ変更 */
+    background: linear-gradient(90deg, #2563eb, #3b82f6); /* 少し青寄りのグラデ */
     color: white;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     z-index: 15000;
@@ -54,11 +53,14 @@
   .site-logo {
     height: 48px;
     border-radius: 6px;
+    background-color: white; /* ロゴ背景白 */
+    padding: 4px; /* 少し余白 */
     user-select: none;
   }
   .site-title {
     font-size: 1.7rem;
     font-weight: 700;
+    color: white; /* タイトル白 */
     user-select: none;
   }
 
@@ -119,7 +121,6 @@
     overflow: hidden;
   }
 
-  /* メイン */
   main {
     max-width: 900px;
     margin: 0 auto 60px;
@@ -171,7 +172,6 @@
     outline: none;
   }
 
-  /* 画像 */
   img {
     max-width: 100%;
     border-radius: 12px;
@@ -180,7 +180,6 @@
     display: block;
   }
 
-  /* iframe */
   gradio-app, iframe {
     width: 100%;
     border-radius: 12px;
@@ -189,7 +188,6 @@
     margin-top: 1rem;
   }
 
-  /* footer */
   footer {
     max-width: 900px;
     margin: 0 auto 30px;
@@ -207,12 +205,6 @@
     border-bottom-color: #93c5fd;
   }
 
-  /* スクロール時のヘッダー影 */
-  window-scrolled header.site-header {
-    box-shadow: 0 5px 14px rgba(30,64,175,0.3);
-  }
-
-  /* レスポンシブ */
   @media (max-width: 768px) {
     main {
       padding: 1rem 1rem;
