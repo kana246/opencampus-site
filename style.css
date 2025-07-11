@@ -11,11 +11,11 @@ body {
   overflow-x: hidden;
 }
 
-/* ヘッダーとロゴ（追加部分） */
+/* ヘッダーとロゴ（修正済み） */
 .site-header {
-  background-color: #ffffff; /* 白背景に変更 */
-  color: #1e40af;            /* テキストは青系に */
-  border-bottom: 2px solid #1e40af; /* 下に細い線でアクセント */
+  background-color: #ffffff; /* 白背景 */
+  color: #222;               /* 濃いグレーで視認性UP */
+  border-bottom: 2px solid #1e40af;
   padding: 0.8rem 1.2rem;
   display: flex;
   align-items: center;
@@ -35,16 +35,20 @@ body {
 }
 
 .site-logo {
-  background-color: #fff;
+  height: 48px;
   padding: 4px;
   border-radius: 8px;
-  box-shadow: 0 0 4px rgba(0,0,0,0.1);
+  background-color: #fff;
+  border: 2px solid #1e40af;  /* 青の縁取りでロゴが埋もれない */
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  object-fit: contain;
 }
 
 .site-title {
   font-size: 1.6rem;
   font-weight: 700;
   margin: 0;
+  color: #222; /* 青から変更して読みやすく */
 }
 
 /* セクション */
@@ -82,6 +86,7 @@ h1, h2 {
   font-weight: 700;
   letter-spacing: 0.05em;
 }
+
 .title-header {
   display: flex;
   align-items: center;
