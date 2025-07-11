@@ -33,6 +33,18 @@ body {
   align-items: center;
   gap: 1rem;
 }
+.site-logo {
+  max-height: 42px;        /* 最大高さを設定（必要に応じて調整） */
+  height: auto;
+  width: auto;
+  aspect-ratio: auto;      /* アスペクト比は画像に任せる */
+  object-fit: contain;     /* ロゴがつぶれないように */
+  background-color: #fff;
+  padding: 4px;
+  border-radius: 8px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
 
 
 
