@@ -42,16 +42,18 @@ body {
   gap: 1rem;
 }
 .site-logo {
-  max-height: 42px;       /* 高さ上限だけ指定 */
   height: auto;
   width: auto;
-  aspect-ratio: auto;
+  max-height: 42px; /* 最大の高さだけを制限 */
+  max-width: 100%;
+  aspect-ratio: auto; /* 明示的に比率を壊さない */
   object-fit: contain;
   background-color: #fff;
   padding: 4px;
   border-radius: 8px;
   box-shadow: 0 0 4px rgba(0,0,0,0.1);
   cursor: pointer;
+  display: block;
 }
 
 /* タイトル */
