@@ -7,6 +7,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <style>
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+
     .menu-toggle {
       font-size: 2.8rem;
       width: 56px;
@@ -30,6 +34,7 @@
       background-color: #222;
       outline: none;
     }
+
     nav.side-menu {
       position: fixed;
       top: 0;
@@ -45,6 +50,7 @@
       display: flex;
       flex-direction: column;
     }
+
     nav.side-menu a {
       color: #fff;
       font-weight: 700;
@@ -54,27 +60,61 @@
       border-bottom: 2px solid transparent;
       transition: border-color 0.3s ease;
     }
+
     nav.side-menu a:hover {
       border-bottom: 2px solid #93c5fd;
     }
+
     nav.side-menu.open {
       transform: translateX(0);
     }
+
     body.menu-open {
       overflow: hidden;
     }
+
     img {
       max-width: 100%;
       margin: 1rem 0;
       border-radius: 12px;
       box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
+
+    header.site-header {
+      background-color: #1e40af;
+      color: white;
+      padding: 0.8rem 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .site-logo {
+      height: 48px;
+      border-radius: 6px;
+    }
+
+    .site-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin: 0;
+    }
   </style>
 </head>
 <body>
 
-<header>
-  <h1>🔴 YouTubeコメント分析</h1>
+<header class="site-header">
+  <div class="header-inner">
+    <img src="image/sit.png" alt="湘南工科大学ロゴ" class="site-logo" />
+    <h1 class="site-title">YouTubeコメント分析</h1>
+  </div>
   <button class="menu-toggle" aria-label="メニュー開閉">☰</button>
 </header>
 
@@ -90,7 +130,6 @@
   <a href="#sec8">8. Web公開とデモ</a>
   <a href="#sec9">9. 体験デモ</a>
 </nav>
-
 <section id="sec0">
   <h2>タイトル</h2>
   <p><strong>発表題目：</strong> YouTubeコメント分析による音楽動画の価値推定</p>
