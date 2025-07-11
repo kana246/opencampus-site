@@ -34,14 +34,7 @@ body {
   gap: 1rem;
 }
 
-.site-logo {
-  height: auto;
-  width: auto;
-  max-height: 42px;
-  max-width: 120px;
-  object-fit: contain;
-  aspect-ratio: auto;
-}
+
 
 
 .site-title {
