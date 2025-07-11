@@ -7,11 +7,11 @@ body {
   max-width: 100vw;
   margin: 0 auto;
   padding: 4rem 2rem;
-  padding-top: 80px;  /* 固定ヘッダー分の余白 */
+  padding-top: 80px;  /* ← 追加：固定ヘッダーの高さ分の余白 */
   overflow-x: hidden;
 }
 
-/* ヘッダーとロゴ（追加部分） */
+/* ヘッダーとロゴ */
 .site-header {
   background-color: #1e40af;
   color: white;
@@ -20,11 +20,11 @@ body {
   align-items: center;
   justify-content: space-between;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 12000;
+  position: fixed;      /* ← 追加：上部に固定 */
+  top: 0;               /* ← 追加 */
+  left: 0;              /* ← 追加 */
+  width: 100%;          /* ← 追加 */
+  z-index: 12000;       /* ← 追加：メニューより上 */
 }
 
 .header-inner {
@@ -32,13 +32,10 @@ body {
   align-items: center;
   gap: 1rem;
 }
-
 .site-logo {
   height: 48px;
   border-radius: 6px;
-  cursor: pointer;
 }
-
 .site-title {
   font-size: 1.6rem;
   font-weight: 700;
