@@ -44,6 +44,11 @@ body {
   font-weight: 700;
   margin: 0;
 }
+.site-logo-wrapper {
+  background-color: #fff;
+  padding: 6px;
+  border-radius: 8px;
+}
 
 /* セクション */
 @keyframes floatUpDown {
