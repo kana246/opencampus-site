@@ -2,227 +2,182 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>🔴YouTubeコメント分析による音楽動画の価値推定</title>
-<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>YouTubeコメント分析（スマホ最適版）</title>
 <style>
-  /* Reset & base */
+  /* ベースリセット */
   * {
     box-sizing: border-box;
   }
   body {
     margin: 0; padding: 0;
-    font-family: 'Roboto', sans-serif;
-    background: #f9fafb;
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: #f5f7fa;
     color: #222;
-    line-height: 1.6;
-  }
-  a {
-    color: #0052cc;
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s ease;
-  }
-  a:hover {
-    color: #003d99;
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
   }
 
   /* ヘッダー */
   header {
     position: fixed;
     top: 0; left: 0; right: 0;
-    background: linear-gradient(90deg, #0047ab, #1e90ff);
+    height: 56px;
+    background: rgba(0, 71, 171, 0.9);
     color: white;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.75rem 2rem;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-    transition: background-color 0.5s ease, box-shadow 0.5s ease;
+    padding: 0 16px;
+    font-weight: 700;
+    font-size: 1.25rem;
     z-index: 10000;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
   }
   header.scrolled {
-    background: rgba(0, 71, 171, 0.85);
-    box-shadow: 0 4px 25px rgba(0,0,0,0.3);
-    backdrop-filter: saturate(180%) blur(20px);
+    background: rgba(0, 71, 171, 0.7);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    backdrop-filter: saturate(180%) blur(6px);
   }
   .logo {
     display: flex;
     align-items: center;
-    gap: 1rem;
   }
   .logo img {
-    height: 50px;
+    height: 36px;
+    width: 36px;
+    margin-right: 8px;
+    border-radius: 4px;
     background: white;
-    border-radius: 6px;
+    user-select: none;
+  }
+
+  /* メニューボタン */
+  button.menu-toggle {
+    background: transparent;
+    border: none;
+    font-size: 28px;
+    color: white;
+    cursor: pointer;
     padding: 4px;
     user-select: none;
   }
-  .logo h1 {
-    font-family: 'Roboto Slab', serif;
-    font-weight: 700;
-    font-size: 1.8rem;
-    user-select: none;
-    margin: 0;
-    letter-spacing: 0.05em;
-  }
-  button.menu-toggle {
-    background: white;
-    border: none;
-    border-radius: 50%;
-    width: 48px;
-    height: 48px;
-    font-size: 1.8rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  button.menu-toggle:hover {
-    background-color: #e3e9f3;
+  button.menu-toggle:focus {
+    outline: 2px solid #a3c4ff;
+    outline-offset: 2px;
   }
 
-  /* サイドメニュー */
+  /* サイドメニュー（フルスクリーンオーバーレイ） */
   nav.side-menu {
     position: fixed;
-    top: 0; right: 0;
-    height: 100vh;
-    width: 280px;
-    background: #0047ab;
-    padding: 4rem 2rem 2rem;
-    box-shadow: -8px 0 30px rgba(0, 0, 0, 0.3);
+    top: 0; right: 0; bottom: 0; left: 0;
+    background: rgba(0, 47, 111, 0.95);
+    backdrop-filter: blur(10px);
     transform: translateX(100%);
-    transition: transform 0.4s ease;
+    transition: transform 0.3s ease;
     display: flex;
     flex-direction: column;
+    padding-top: 56px;
     z-index: 9999;
   }
   nav.side-menu.open {
     transform: translateX(0);
   }
   nav.side-menu a {
-    color: white;
-    font-weight: 700;
-    font-size: 1.2rem;
-    margin-bottom: 1.5rem;
-    border-bottom: 2px solid transparent;
-    padding-bottom: 2px;
-    transition: border-color 0.3s ease;
+    padding: 14px 24px;
+    font-size: 1.15rem;
+    color: #cde1ff;
+    font-weight: 600;
+    border-bottom: 1px solid #2e5cb8;
+    text-decoration: none;
+    user-select: none;
+    transition: background-color 0.25s ease;
   }
   nav.side-menu a:hover,
   nav.side-menu a:focus {
-    border-color: #a3c4ff;
+    background-color: #1b3a87;
     outline: none;
   }
 
-  /* メインコンテンツ */
+  /* メイン */
   main {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 120px 2rem 60px;
+    margin-top: 56px;
+    padding: 12px 16px 24px;
+    max-width: 100%;
   }
   section {
     background: white;
-    border-radius: 12px;
-    box-shadow: 0 15px 40px rgba(0, 71, 171, 0.1);
-    padding: 2.5rem 3rem;
-    margin-bottom: 4rem;
-    transition: box-shadow 0.3s ease;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0,71,171,0.1);
   }
-  section:hover {
-    box-shadow: 0 25px 55px rgba(0, 71, 171, 0.18);
-  }
-  h2 {
-    font-family: 'Roboto Slab', serif;
+  section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
     font-weight: 700;
-    font-size: 2.2rem;
-    color: #003d99;
-    margin-bottom: 1rem;
-    user-select: none;
+    color: #004ea8;
   }
-  h3 {
-    font-weight: 600;
-    font-size: 1.4rem;
-    color: #0052cc;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
+  section h3 {
+    font-size: 1.2rem;
+    margin-top: 16px;
+    margin-bottom: 8px;
+    color: #0f4ea8;
   }
   p, ul {
-    font-size: 1.15rem;
-    color: #444;
-    margin-bottom: 1.3rem;
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 12px;
+    line-height: 1.4;
   }
   ul {
     padding-left: 1.2rem;
-    list-style-type: disc;
   }
   ul li {
-    margin-bottom: 0.7rem;
+    margin-bottom: 8px;
   }
 
-  /* 画像 */
-  img {
+  /* 画像やiframeは幅100%で縦長に */
+  img, iframe, gradio-app {
+    width: 100%;
     max-width: 100%;
-    border-radius: 14px;
-    box-shadow: 0 12px 30px rgba(0, 71, 171, 0.15);
-    margin: 1rem 0 1.8rem 0;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0, 71, 171, 0.15);
+    margin: 16px 0;
     display: block;
   }
-
-  /* gradio */
-  gradio-app, iframe {
-    width: 100%;
-    height: 620px;
-    border-radius: 14px;
-    box-shadow: 0 20px 50px rgba(0, 71, 171, 0.25);
-    margin-top: 1.5rem;
+  gradio-app {
+    height: 580px;
   }
 
   /* フッター */
   footer {
     text-align: center;
+    font-size: 0.85rem;
     color: #666;
-    font-size: 0.9rem;
-    margin: 0 auto 30px;
+    margin: 0 0 32px;
   }
   footer a {
-    color: #0052cc;
+    color: #004ea8;
     font-weight: 700;
-    border-bottom: 2px solid transparent;
     text-decoration: none;
+    border-bottom: 1.5px solid transparent;
     transition: border-color 0.3s ease;
   }
   footer a:hover {
-    border-bottom-color: #a3c4ff;
+    border-color: #6ea0f7;
   }
 
-  /* レスポンシブ */
-  @media (max-width: 768px) {
-    main {
-      padding: 110px 1rem 40px;
-    }
-    nav.side-menu {
-      width: 240px;
-      padding: 3rem 1.5rem 2rem;
-    }
-    button.menu-toggle {
-      width: 44px;
-      height: 44px;
-      font-size: 1.5rem;
-    }
-    section {
-      padding: 2rem 1.5rem;
-      margin-bottom: 3rem;
-    }
-  }
 </style>
 </head>
 <body>
 
-<header role="banner" id="pageHeader">
+<header id="pageHeader" role="banner" aria-label="ページヘッダー">
   <div class="logo">
     <img src="sit.png" alt="湘南工科大学ロゴ" />
-    <h1>YouTubeコメント分析</h1>
+    <span>YouTubeコメント分析</span>
   </div>
-  <button aria-label="メニュー開閉" aria-expanded="false" aria-controls="sideMenu" class="menu-toggle" id="menuToggle">☰</button>
+  <button class="menu-toggle" aria-controls="sideMenu" aria-expanded="false" aria-label="メニュー開閉" id="menuToggle">☰</button>
 </header>
 
 <nav id="sideMenu" class="side-menu" aria-hidden="true" role="navigation" aria-label="セクションメニュー">
@@ -336,15 +291,14 @@
 </footer>
 
 <script type="module" src="https://gradio.s3-us-west-2.amazonaws.com/5.34.2/gradio.js"></script>
-
 <script>
-  // ヘッダーの透明度変化
+  // ヘッダー透明度変化
   const header = document.getElementById('pageHeader');
   const menuToggle = document.getElementById('menuToggle');
   const sideMenu = document.getElementById('sideMenu');
 
   window.addEventListener('scroll', () => {
-    if(window.scrollY > 50) {
+    if(window.scrollY > 30) {
       header.classList.add('scrolled');
     } else {
       header.classList.remove('scrolled');
@@ -353,15 +307,15 @@
 
   // メニュー開閉
   menuToggle.addEventListener('click', () => {
-    const isOpen = sideMenu.classList.toggle('open');
-    menuToggle.setAttribute('aria-expanded', isOpen);
-    sideMenu.setAttribute('aria-hidden', !isOpen);
-    document.body.style.overflow = isOpen ? 'hidden' : '';
+    const opened = sideMenu.classList.toggle('open');
+    menuToggle.setAttribute('aria-expanded', opened);
+    sideMenu.setAttribute('aria-hidden', !opened);
+    document.body.style.overflow = opened ? 'hidden' : '';
   });
 
-  // メニューリンククリックで閉じる
-  sideMenu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
+  // メニューのリンククリックで閉じる
+  sideMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
       sideMenu.classList.remove('open');
       menuToggle.setAttribute('aria-expanded', false);
       sideMenu.setAttribute('aria-hidden', true);
@@ -370,7 +324,7 @@
   });
 
   // メニュー外クリックで閉じる
-  document.addEventListener('click', (e) => {
+  document.addEventListener('click', e => {
     if(!sideMenu.contains(e.target) && !menuToggle.contains(e.target)) {
       if(sideMenu.classList.contains('open')) {
         sideMenu.classList.remove('open');
