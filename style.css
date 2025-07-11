@@ -13,8 +13,9 @@ body {
 
 /* ヘッダーとロゴ（追加部分） */
 .site-header {
-  background-color: #1e40af;
-  color: white;
+  background-color: #ffffff; /* 白背景に変更 */
+  color: #1e40af;            /* テキストは青系に */
+  border-bottom: 2px solid #1e40af; /* 下に細い線でアクセント */
   padding: 0.8rem 1.2rem;
   display: flex;
   align-items: center;
@@ -34,20 +35,16 @@ body {
 }
 
 .site-logo {
-  height: 48px;
-  border-radius: 6px;
-  cursor: pointer;
+  background-color: #fff;
+  padding: 4px;
+  border-radius: 8px;
+  box-shadow: 0 0 4px rgba(0,0,0,0.1);
 }
 
 .site-title {
   font-size: 1.6rem;
   font-weight: 700;
   margin: 0;
-}
-.site-logo-wrapper {
-  background-color: #fff;
-  padding: 6px;
-  border-radius: 8px;
 }
 
 /* セクション */
