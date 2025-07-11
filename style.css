@@ -35,13 +35,14 @@ body {
 }
 
 .site-logo {
-  background-color: #fff;
-  padding: 4px;
-  border-radius: 8px;
-  height: 42px; /* ← 少し小さく */
-  box-shadow: 0 0 4px rgba(0,0,0,0.1);
-  cursor: pointer;
+  height: auto;
+  width: auto;
+  max-height: 42px;
+  max-width: 120px;
+  object-fit: contain;
+  aspect-ratio: auto;
 }
+
 
 .site-title {
   font-size: 1.5rem; /* ← 少し小さく */
@@ -71,6 +72,7 @@ section {
   animation: floatUpDown 5s ease-in-out infinite;
   box-shadow: 0 12px 30px rgba(30, 64, 175, 0.25);
   transition: box-shadow 0.3s ease;
+  scroll-margin-top: 80px;
 }
 
 section:hover {
